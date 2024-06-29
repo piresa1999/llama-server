@@ -1,0 +1,11 @@
+services:
+  app:
+    build:
+      context: .
+      target: poetry
+    restart: always
+    command: /bin/sh -c "tail -f /dev/null" #./TinyLlama-1.1B-Chat-v1.0.Q5_K_M.llamafile --server --nobrowser
+    ports: 
+      - "18080:8080"
+    # environment:
+      # - FLASK_ENV=development

@@ -1,0 +1,19 @@
+{
+    "name": "Dev Environment",
+    "build": {
+        "context": "..",
+        "dockerfile": "../Dockerfile"
+    },
+    "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash",
+        "python.pythonPath": "/usr/local/bin/python",
+        "python.linting.enabled": true,
+        "python.linting.pylintEnabled": true,
+        "python.linting.pylintPath": "/usr/local/bin/pylint"
+    },
+    "extensions": [
+        "ms-python.python",
+        "shiro.pythonpack",
+        "donjayamanne.python-extension-pack"
+    ]
+}
