@@ -31,9 +31,7 @@ Error: Returns a JSON object with an error message indicating the missing parame
 
 ### Success Response Example:
 ```
-{
-    "generated_text": "Ahoy! My favorite kind of boat be the mighty galleon, arrr!"
-}
+"<|system|>\nYou are a succinct chat bot that will do as prompted by the user, or if asked a question will answer that question.</s>\n<|user|>\nWhat is the day that follows Friday?</s>\n<|assistant|>\nThe day that follows Friday is: \n\nSaturday\n\nSunday\n\nMonday\n\nTuesday\n\nWednesday\n\nThursday\n\n"
 ```
 
 ### Error Response Example:
