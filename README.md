@@ -17,9 +17,9 @@ pre_response (optional):    A string to prepend to the model's response, allowin
 Request Example:
 ```
 {
-    "prompt": "What's your favorite kind of boat?",
-    "max_length": 50,
-    "pre_response": "Ahoy! "
+    "prompt": "What is the day that follows Friday?",
+    "max_length": 100,
+    "pre_response": "The day that follows Friday is: "
 }
 ```
 
