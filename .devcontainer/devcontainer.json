@@ -1,9 +1,8 @@
 {
-    "name": "Dev Environment",
-    "build": {
-        "context": "..",
-        "dockerfile": "../Dockerfile"
-    },
+    "name": "Llama dev Environment",
+    "dockerComposeFile": ["../compose.yaml", "dev-compose.yaml"],
+    "service": "app",
+    "workspaceFolder": "/app",
     "settings": {
         "terminal.integrated.shell.linux": "/bin/bash",
         "python.pythonPath": "/usr/local/bin/python",

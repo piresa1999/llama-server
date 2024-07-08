@@ -1,31 +1,38 @@
-FROM python:3.12 as base
+# Use python as base image
+FROM pytorch/pytorch  as base
 
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
 
-# Set work directory
+# ENV PYTHONDONTWRITEBYTECODE 1
+# ENV PYTHONUNBUFFERED 1
+
+# # Set work directory
 WORKDIR /app
 
-# Download a llamafile from HuggingFace
-RUN wget https://huggingface.co/jartine/TinyLlama-1.1B-Chat-v1.0-GGUF/resolve/main/TinyLlama-1.1B-Chat-v1.0.Q5_K_M.llamafile
-
-# Make the file executable. On Windows, instead just rename the file to end in ".exe".
-RUN chmod +x TinyLlama-1.1B-Chat-v1.0.Q5_K_M.llamafile
-
+# # Install Python 3.12 and other system dependencies
+# RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+#     software-properties-common \
+#     build-essential \
+#     libpq-dev \
+#     git && \
+#     add-apt-repository ppa:deadsnakes/ppa && \
+#     apt-get install -y python3.12 python3.12-venv python3.12-dev && \
+#     python3.12 -m ensurepip && \
+#     python3.12 -m pip install six && \
+#     rm -rf /var/lib/apt/lists/*
 
 FROM base AS poetry
 
-# Install Poetry
-RUN pip install --upgrade pip && pip install poetry
+# # Install Poetry
+RUN python -m pip install --upgrade pip && python3 -m pip install poetry
 
 # Copy only requirements to cache them in docker layer
-COPY poetry.lock pyproject.toml ./
+COPY poetry.lock pyproject.toml README.md /app/
 
 # Project initialization
 # RUN poetry config virtualenvs.create false 
 RUN poetry config virtualenvs.create false \
     && poetry install --no-interaction --no-ansi
 
-# Start the model server. Listens at http://localhost:8080 by default.
-# RUN ./TinyLlama-1.1B-Chat-v1.0.Q5_K_M.llamafile --server --nobrowser
+FROM poetry as prod
+
+COPY . ./
